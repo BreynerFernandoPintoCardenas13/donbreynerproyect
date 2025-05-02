@@ -1,11 +1,46 @@
 'use client'
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { setupLucid } from "@/lucidSetup";
 
 export default function Principal() {
   const [txHash, setTxHash] = useState<string | null>(null); // ⬅️ nuevo estado para el hash
+  const [FormVisible, SetFormVisible]= useState(false)
+  const [direccion, setDireccion] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [cedula, setCedula] = useState("");
 
+  const ManejoFormulario = async (e: React.FormEvent) =>{
+    e.preventDefault();
+    if (!nombre || !cedula || !direccion){
+        alert("Faltan campos por rellenar por favor completelos")
+        return;
+    }
+    try{
+        const response = await fetch("https://68144b32225ff1af16286cfe.mockapi.io/taxis",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nombre,
+                cedula,
+                direccion
+            }),
+        })
+        const data = await response.json();
+        if (data){
+            alert("Datos subidos correctamente :)")
+            SetFormVisible(false)
+            PedirTaxi()
+        }else{
+            alert("Error al subir los datos al mockAPI")
+        }
+    }catch(error){
+        console.error("errorr al guardar los datos", error)
+        alert("error al intentar acceder a la API")
+    }
+  }
   const PedirTaxi = async () => {
     try {
       if (!window.cardano?.eternl) {
@@ -42,11 +77,32 @@ export default function Principal() {
           Bienvenido a Breyner Company, donde venimos a revolucionar el mundo y ademas el dueño es muy sexy. Pide tu taxi y paga con Cardano.
         </p>
       </div>
-      <button className="button__header" onClick={PedirTaxi}>
+      <button className="button__header" onClick={()=> SetFormVisible(true)}>
         Pedir taxi
       </button>
 {/*       {txHash && <p className="wallet">Transacción enviada: {txHash}</p>} MUESTRA EL HASHHHHHHHHHHHH
- */}    </header>
+ */}    
+        {FormVisible &&(
+        <div className="div__formulario">
+            <button onClick={()=> SetFormVisible(false)} className="button__back"> Back</button>
+            <form onSubmit={ManejoFormulario} className="form">
+                <label htmlFor="" className="label">
+                    Nombre:
+                    <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required  className="input"/>
+                </label>
+                <label htmlFor="" className="label">
+                    Cedula:
+                    <input type="number" value={cedula} onChange={(e) => setCedula(e.target.value)} required className="input"/>
+                </label>
+                <label htmlFor="" className="label">
+                    Direccion:
+                    <input type="text" value={direccion} onChange={(e) => setDireccion(e.target.value)} required className="input"/>
+                </label>
+                <button type="submit" className="button__formulario">Enviar y Pagar</button>
+            </form>
+        </div>
+        )}
+    </header>
 
     
   );

@@ -1,3 +1,7 @@
+#IMPORTANTE PARA CORRER EL PROYECTO DEBES TENER UNA WALLET EN ETERNL
+
+
+
 🧠 ¿Qué es SOAP?
 Don Breyner, imagine que su sistema actual (el que tiene la app de taxis) funciona como una central telefónica bien antigua.
 Cada vez que un cliente pide un taxi por la app, esa solicitud tiene que llenar muchos formularios, pasar por varias oficinas y validaciones, como si tuviera que hacer fila en la DIAN.

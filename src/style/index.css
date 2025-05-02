@@ -66,3 +66,56 @@ header{
     cursor: pointer;
     background-color: black;
 }
+
+.div__formulario{
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 30%;
+    height: 400px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;   
+}
+.button__back{
+    margin-top: 15px;
+    cursor: pointer;
+    background-color: #f6c600;
+    width: 150px;
+    
+    color: black;
+    cursor: pointer;
+    border-radius: 30px;
+}
+.button__back:hover{
+    transform: scale(20px);
+}
+.form{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px   ;
+    flex-direction: column;
+    padding: 100px;
+}
+.label{
+    color: white;
+    justify-content: space-between;
+    display: flex;
+    gap: 10px;
+}
+.input{
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+}
+
+.button__formulario{
+    background-color: #f6c600;
+    width: 150px;
+    height: 40px;
+    color: black;
+    cursor: pointer;
+    border-radius: 30px;
+}
